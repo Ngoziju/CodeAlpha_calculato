@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+    :root{
+        --cream: #1c1c1c;
+        --warm-white: #505050;
+        --amber: #d4d4d2;
+        --amber-light: #ff9500;
+        --amber-dim: #ffb340;
+        --rust: #fffff;
+        --ink: #000000;
+        --ink-light: rgba(0, 0, 0, 0.2);
+        --shadow-warm: rgba(30, 18, 8, 0.4)
+    }
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font:  sans-serif;
+}
+ html, body {
+    height: 100%;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    cursor: none;
+    overflow: hidden;
+  }
+#calculator{
+    width: 315px;
+    border-radius: 30px;
+    padding: 15px;
+    background-color: var(--cream);
+    box-shadow: 0 8px 16px var(--shadow-warm);
+    backdrop-filter: blur(20px);
+    animation:  borderMove 2s linear infinite;
+    border: 6px solid transparent;
+
+}
+
+/* =========================
+   COLOR MOVING AROUND EDGES
+========================= */
+
+@keyframes borderMove {
+
+  0% {
+    border-top-color: red;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+
+  25% {
+    border-top-color: transparent;
+    border-right-color: blue;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+
+  50% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: green;
+    border-left-color: transparent;
+  }
+
+  75% {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: yellow;
+  }
+
+  100% {
+    border-top-color: red;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+}
+
+
+/* =========================
+   USE IT
+========================= */
+
+.box {
+  width: 200px;
+  height: 200px;
+
+  border: 6px solid transparent;
+
+  animation: borderMove 2s linear infinite;
+}
+
+ /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--amber);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, background 0.2s;
+    mix-blend-mode: screen;
+  }
+    /* Background texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 80% at 20% 30%, rgba(200, 137, 58, 0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 70%, rgba(139, 58, 42, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+    @keyframes rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+   /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--amber);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, background 0.2s;
+    mix-blend-mode: screen;
+  }
+
+  #calculator {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.7;
+  }
+  
+#display{
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 2em;
+    text-align: right;
+    color: #ffff;
+    background-color: #fff;
+    box-shadow: inset -5px -5px 12px #ffffff 5px 5px 12px rgba(0,0,0,0.6);
+    border-radius: 20px;
+    background-color: var(--ink);
+}
+#keys{
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+button{
+    height: 62px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 400;
+    cursor: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+.opreator{
+    background-color: #fff;
+  box-shadow: inset 5px 5px 12px #ffffff 5px 5px 12px rgba(0,0,0,0.6);
+  color: pink; 
+}
+.opreator:hover{
+    background-color: pink;
+    color: #fff;
+}
+button{
+    height: 45px;
+    width: 60px;
+    background-color: var(--amber-light);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    border: none;
+}
+/* Function buttons (AC, +/-, %) */
+  .btn-fn {
+    background: #5E2519;
+    color: #ffff;
+    box-shadow: 0 4px 0 var(--cream), 0 8px 18px rgba(139,58,42,0.4);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+  }
+  .btn-fn:hover {
+    background: var(--amber-light);
+    box-shadow: 0 4px 0 #B5A898, 0 6px 12px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+  }
+  .btn-fn:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: 0 1px 0 #B5A898;
+  }
+   /* Digit buttons */
+  .btn-dight {
+    background: #EDE4D5;
+    color: var(--ink);
+    box-shadow: 0 3px 0 #C8BA9E, 0 4px 8px rgba(0,0,0,0.1);
+  }
+  .btn-dight:hover {
+    background: #F0E8DA;
+    box-shadow: 0 4px 0 #C8BA9E, 0 6px 12px rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+  }
+  .btn-dight:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: 0 1px 0 #C8BA9E;
+  }
+  /* Operator buttons */
+  .opreator {
+    background: var(--amber);
+    color: var(--warm-white);
+    box-shadow: 0 3px 0 var(--amber-dim), 0 4px 12px rgba(200,137,58,0.3);
+    font-size: 18px;
+  }
+  .opreator:hover {
+    background: var(--warm-white);
+    box-shadow: 0 4px 0 var(--amber-dim), 0 8px 18px rgba(200,137,58,0.4);
+    transform: translateY(-1px);
+    color: var(--amber-dim);
+  }
+  .opreator:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: 0 1px 0 var(--amber-dim);
+  }
+  /* Equals */
+  .btn-eq {
+    background: var(--rust);
+    color: var(--warm-white);
+    box-shadow: 0 3px 0 #5E2519, 0 4px 12px rgba(139,58,42,0.3);
+    font-size: 20px;
+  }
+  .btn-eq:hover {
+    background: #A04535;
+    box-shadow: 0 4px 0 #5E2519, 0 8px 18px rgba(139,58,42,0.4);
+    transform: translateY(-1px);
+  }
+  .btn-eq:active {
+    transform: translateY(2px) scale(0.96);
+    box-shadow: 0 1px 0 #5E2519;
+  }
+
+    </style>
+</head>
+<body>
+    
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor" id="cursor"></div>
+   <div id="calculator">
+    <input id="display" readonly>
+    <div id="keys">
+        <button onclick="cleardisplay()" class="btn-fn">AC</button>
+        <button onclick="deletedisplay()" class="btn-fn">DEL</button>
+        <button onclick="append('%')" class="btn-fn">%</button>
+        <button onclick="append('/')" class="btn-fn">/</button>
+
+
+        <button onclick="append('7')" class="btn-dight">7</button>
+            <button onclick="append('8')" class="btn-dight">8</button>
+            <button onclick="append('9')" class="btn-dight">9</button>
+            <button onclick="append('*')" class="opreator">*</button>
+ 
+            
+            <button onclick="append('4')" class="btn-dight">4</button>
+            <button onclick="append('5')" class="btn-dight">5</button>
+            <button onclick="append('6')" class="btn-dight">6</button>
+            <button onclick="append('-')" class="opreator">-</button>
+
+            
+            <button onclick="append('1')" class="btn-dight">1</button>
+            <button onclick="append('2')" class="btn-dight">2</button>
+            <button onclick="append('3')" class="btn-dight">3</button>
+            <button onclick="append('+')" class="opreator">+</button>
+
+            
+            <button onclick="append('0')" class="btn-dight">0</button>
+            <button onclick="append('00')" class="btn-dight">00</button>
+            <button onclick="append('.')" class="btn-dight">.</button>
+            <button onclick="calculate('=')" class="btn-eq">=</button>
+        </div>
+   </div> 
+   <script src="index.js"></script>
+</body>
+</html>
