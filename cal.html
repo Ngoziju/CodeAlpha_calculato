@@ -110,8 +110,20 @@
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, background 0.2s;
+    transition: transform 0.12s ease, width 0.12s ease, height 0.12s ease, background 0.2s ease;
     mix-blend-mode: screen;
+    display: none;
+  }
+
+  body.has-custom-cursor .cursor {
+    display: block;
+  }
+
+  .cursor.hover {
+    width: 16px;
+    height: 16px;
+    background: var(--amber-light);
+    box-shadow: 0 0 14px rgba(255, 149, 0, 0.7);
   }
     /* Background texture */
   body::before {
@@ -132,18 +144,6 @@
     @keyframes rise {
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
-  }
-   /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 10px; height: 10px;
-    background: var(--amber);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, background 0.2s;
-    mix-blend-mode: screen;
   }
 
   #calculator {
@@ -168,6 +168,17 @@
     box-shadow: inset -5px -5px 12px #ffffff 5px 5px 12px rgba(0,0,0,0.6);
     border-radius: 20px;
     background-color: var(--ink);
+    caret-color: transparent;
+}
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+
+  .cursor {
+    display: none !important;
+  }
 }
 #keys{
     gap: 12px;
@@ -282,7 +293,6 @@ button{
 </head>
 <body>
     
-    <div class="cursor" id="cursor"></div>
     <div class="cursor" id="cursor"></div>
    <div id="calculator">
     <input id="display" readonly>
